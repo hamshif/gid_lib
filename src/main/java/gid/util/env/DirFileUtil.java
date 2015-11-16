@@ -149,6 +149,59 @@ public class DirFileUtil
         return buffer;
     }
 
+    public static String[] readFileFromInternalStorage(Context context, String fileName, int max)
+    {
+        BufferedReader input = null;
+        String [] buffer = new String[max];
+
+        //TODO dispose of this java nonsense
+        for (int i=0; i<max; i++)
+        {
+            buffer[i] = "";
+        }
+
+        try
+        {
+            Log.d(TAG, "context.getFilesDir(): " + context.getFilesDir());
+
+            input = new BufferedReader(new InputStreamReader(context.openFileInput(fileName)));
+            String line;
+
+            int count = 0;
+
+            while ((line = input.readLine()) != null)
+            {
+                Log.d(TAG, "count: " + count);
+
+                if(count<max)
+                {
+                    buffer[count] = line;
+                    count++;
+                }
+                else
+                {
+                    Log.w(TAG, "The config file has more than the " + max + " read lines");
+                    break;
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Log.e(TAG, "", e);
+        }
+        finally {
+            if (input != null) {
+                try {
+                    input.close();
+                } catch (IOException e) {
+                    Log.e(TAG, "", e);
+                }
+            }
+        }
+
+        return buffer;
+    }
+
 
 
     /** Create a file Uri for saving an image or video */
