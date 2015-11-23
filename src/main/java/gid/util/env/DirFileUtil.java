@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -95,8 +96,19 @@ public class DirFileUtil
     }
 
 
-    public static String[] readFileFromInternalStorage1(Context context, String fileName)
+    public static String[] readFileFromInternalStorage1(Context context, String fileName) throws FileNotFoundException
     {
+        Log.d(TAG, "context.getFilesDir(): " + context.getFilesDir());
+
+        String filePath = context.getFilesDir() + "/" + fileName;
+
+        File file = new File(filePath);
+        if(!file.exists())
+        {
+            throw new FileNotFoundException();
+        }
+
+
         final int max = 50;
         BufferedReader input = null;
         String [] buffer = new String[max];
@@ -109,8 +121,6 @@ public class DirFileUtil
 
         try
         {
-            Log.d(TAG, "context.getFilesDir(): " + context.getFilesDir());
-
             input = new BufferedReader(new InputStreamReader(context.openFileInput(fileName)));
             String line;
 
