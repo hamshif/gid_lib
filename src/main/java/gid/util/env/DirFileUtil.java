@@ -68,7 +68,7 @@ public class DirFileUtil
 
         try
         {
-            Log.d(TAG, "context.getFilesDir(): " + context.getFilesDir());
+//            Log.d(TAG, "context.getFilesDir(): " + context.getFilesDir());
 
             input = new BufferedReader(new InputStreamReader(context.openFileInput(fileName)));
             String line;
@@ -98,7 +98,7 @@ public class DirFileUtil
 
     public static String[] readFileFromInternalStorage1(Context context, String fileName) throws FileNotFoundException
     {
-        Log.d(TAG, "context.getFilesDir(): " + context.getFilesDir());
+//        Log.d(TAG, "context.getFilesDir(): " + context.getFilesDir());
 
         String filePath = context.getFilesDir() + "/" + fileName;
 
@@ -128,7 +128,7 @@ public class DirFileUtil
 
             while ((line = input.readLine()) != null)
             {
-                Log.d(TAG, "count: " + count);
+//                Log.d(TAG, "count: " + count);
 
                 if(count<max)
                 {
@@ -172,7 +172,7 @@ public class DirFileUtil
 
         try
         {
-            Log.d(TAG, "context.getFilesDir(): " + context.getFilesDir());
+//            Log.d(TAG, "context.getFilesDir(): " + context.getFilesDir());
 
             input = new BufferedReader(new InputStreamReader(context.openFileInput(fileName)));
             String line;
